@@ -127,11 +127,7 @@ namespace CMS.Areas.Admin.Controllers
         //public ActionResult Edit([Bind(Include = "ID,Subject,Summary,ContentText,IsPublich,PublishDate,ViewCount,CreateUser,CreateDate,UpdateUser,UpdateDate")] Article article)
         public ActionResult Edit([Bind(Include = "ID,Subject,Summary,ContentText,IsPublich,PublishDate,ViewCount", Exclude = "Image,CreateDate,CreateUser,UpdateDate,UpdateUser")] Article article, HttpPostedFileBase image)
         {
-            string ImageFileName = "";
-            if (image != null)
-            {
-                ImageFileName = SaveImageAndGetFileName(image);
-            }
+            string ImageFileName = SaveImageAndGetFileName(image);
 
             if (ModelState.IsValid)
             {
