@@ -4,27 +4,35 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+//using System.Data;
+//using System.Data.Entity;
+
+using CMS.Models;
+
+
 namespace CMS.Controllers
 {
     public class HomeController : Controller
     {
+        private CMSDatabaseEntities db = new CMSDatabaseEntities();
+
+        // GET: Home
         public ActionResult Index()
         {
-            return View();
-        }
+            var result = (from article in db.Article
+                          orderby article.CreateDate descending
+                              select article
+                              );
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            CMS.ViewModels.IndexViewModel vm = new CMS.ViewModels.IndexViewModel();
+            if (result != null)
+            {
+                vm.Head = result.First();
+            }
 
-            return View();
-        }
+            vm.MyProperty = 123;
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(vm);
         }
     }
 }

@@ -12,6 +12,8 @@ using PagedList;
 using System.IO;
 using Microsoft.AspNet.Identity;
 
+using CMS.Areas.Admin.ViewModels;
+
 namespace CMS.Areas.Admin.Controllers
 {
     [Authorize]
@@ -42,12 +44,55 @@ namespace CMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Article.Find(id);
-            if (article == null)
+            //Article article = db.Article.Find(id);
+            //var result = db.Article.Join(db.AspNetUsers,);
+
+            var result = (from article in db.Article
+                          join user in db.AspNetUsers on article.CreateUser.ToString() equals user.Id into ArticleUser     
+                          from au in ArticleUser.DefaultIfEmpty()
+                          where article.ID == id
+                          select new
+                          {
+                              article.Subject,
+                              article.Summary,
+                              article.ContentText,
+                              article.Image,
+                              Email = au.Email,
+                              UserName = au.UserName
+                          }).SingleOrDefault();
+
+            //var result = (from article in db.Article
+            //              where article.ID == id
+            //              select new { article.Subject, article.Summary, article.ContentText }).SingleOrDefault();
+            
+            ArticlesDetailsViewModel vm = new ArticlesDetailsViewModel();
+
+            if (result != null)
+            {
+                vm.Subject = result.Subject;
+                vm.Summary = result.Summary;
+                vm.ContentText = result.ContentText;
+                vm.Image = result.Image;
+                vm.CreateUser = result.UserName;
+            }
+            else
             {
                 return HttpNotFound();
             }
-            return View(article);
+
+            
+            //ArticlesDetailsViewModel vm = new ArticlesDetailsViewModel() 
+            //{ 
+            //    Subject = article.Subject,
+            //    Summary = article.Summary,
+            //    ContentText = article.ContentText
+            //};
+
+            //if (article == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View(vm);
         }
 
         // GET: Admin/Articles/Create

@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CMS.Models;
 
-namespace CMS.Controllers
+namespace CMS.Areas.Admin.Controllers
 {
     [Authorize]
     public class ManageController : Controller

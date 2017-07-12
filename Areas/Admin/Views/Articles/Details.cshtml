@@ -1,4 +1,4 @@
-﻿@model CMS.Models.Article
+﻿@model CMS.Areas.Admin.ViewModels.ArticlesDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,99 +11,46 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Subject)
+            @Html.DisplayNameFor(x => x.Subject)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Subject)
+            @Html.DisplayFor(x => x.Subject)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Summary)
+            @Html.DisplayNameFor(x => x.Summary)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Summary)
+            @Html.DisplayFor(x => x.Summary)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ContentText)
+            @Html.DisplayNameFor(x => x.ContentText)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ContentText)
+            @Html.DisplayFor(x => x.ContentText)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsPublich)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsPublich)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PublishDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PublishDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ViewCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
+            @Html.DisplayNameFor(x => x.Image)
         </dt>
 
         <dd>
             @if (!string.IsNullOrEmpty(Model.Image))
-            {     
-            <img src="@(Url.Content("~/FileUploads/") + Html.DisplayFor(model => model.Image))" />
+            {
+                <img src="@(Url.Content("~/FileUploads/") + Html.DisplayFor(x => x.Image))" />
             }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreateUser)
+            @Html.DisplayNameFor(x => x.CreateUser)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreateUser)
+            @Html.DisplayFor(x => x.CreateUser)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdateUser)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdateUser)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdateDate)
-        </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

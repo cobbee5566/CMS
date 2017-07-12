@@ -16,6 +16,9 @@ namespace CMS
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BundleTable.EnableOptimizations = true;
+            //http://www.dotnettricks.com/learn/mvc/aspnet-mvc-4-performance-optimization-with-bundling-and-minification
+            //Bundling and minification doesn't work in debug mode. So to enable this featues you need to add below line of code with in Application_Start event of Global.asax.
         }
     }
 }
